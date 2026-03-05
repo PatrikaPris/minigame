@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cube Arena</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 0; background: #0f1320; color: #e9efff; }
+      .wrap { max-width: 980px; margin: 20px auto; padding: 16px; }
+      button { background: #5f75ff; border: 0; color: white; padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+      button:disabled { background: #5f75ff66; cursor: not-allowed; }
+      .grid { display: grid; grid-template-columns: repeat(10, 32px); gap: 5px; margin-top: 16px; }
+      .cell { width: 32px; height: 32px; border-radius: 7px; background: #1f2942; }
+      .cell.player { background: #4cff9c; box-shadow: 0 0 10px #4cff9c88; }
+      .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+      .panel { background: #161e33; border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+      .controls { display: grid; grid-template-columns: 56px 56px 56px; justify-content: center; gap: 8px; margin-top: 18px; }
+      .controls .spacer { visibility: hidden; }
+      code { color: #8fd3ff; }
+      .log { white-space: pre-line; color: #b7c1e8; min-height: 48px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Cube Arena (on-chain)</h1>
+      <div class="panel row">
+        <button id="connectBtn">Подключить кошелёк</button>
+        <button id="registerBtn" disabled>Зарегистрировать куб (0.0005 ETH)</button>
+        <span id="address"></span>
+      </div>
+
+      <div class="panel">
+        <div>Сеть: <code>локальная/совместимая EVM</code></div>
+        <div>Контракт: <code id="contractAddress">укажи адрес после деплоя</code></div>
+        <div id="stats">Статистика: -</div>
+      </div>
+
+      <div class="panel">
+        <div class="grid" id="grid"></div>
+        <div class="controls">
+          <div class="spacer">x</div>
+          <button data-move="0,-1">↑</button>
+          <div class="spacer">x</div>
+          <button data-move="-1,0">←</button>
+          <button disabled>•</button>
+          <button data-move="1,0">→</button>
+          <div class="spacer">x</div>
+          <button data-move="0,1">↓</button>
+          <div class="spacer">x</div>
+        </div>
+      </div>
+
+      <div class="panel log" id="log">Подключи MetaMask и начни двигаться по полю.</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
